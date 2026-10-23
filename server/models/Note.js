@@ -1,5 +1,7 @@
-// Defines the fields stored for each note, including optional checklist data and its owner.
-const mongoose = require('mongoose');
+// Defines the Mongoose schema and model for note documents.
+// Specifies note text, tags, pin state, optional checklist, and owner fields.
+// Sets required values and defaults used when note documents are created.
+// Enables automatic creation and update timestamps for each note.const mongoose = require('mongoose');
 
 const noteSchema = new mongoose.Schema({
   title: { type: String, required: [true, 'Title is required'], trim: true },

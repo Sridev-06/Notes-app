@@ -1,25 +1,18 @@
-// Implements the authenticated note CRUD, search, tag filtering, and pin API.
-const express = require('express');
+// Defines the protected REST endpoints for a user's personal notes.
+// Supports listing, searching, retrieving, creating, editing, and deleting notes.
+// Validates request data and applies optional tag, search, and pin filters.
+// Restricts every database operation to the account identified by the JWT.const express = require('express');
 const mongoose = require('mongoose');
 const Note = require('../models/Note');
 const protect = require('../middleware/authMiddleware');
 const router = express.Router();
-
-// Check whether a route parameter is a valid MongoDB ObjectId.
 const validId = (id) => mongoose.Types.ObjectId.isValid(id);
-// Ensure optional tags are an array containing only text values.
 const validTags = (tags) => tags === undefined || (Array.isArray(tags) && tags.every((tag) => typeof tag === 'string'));
-// Ensure checklist values contain text and optional boolean completion flags.
 const validChecklist = (items) => items === undefined || (Array.isArray(items) && items.every((item) =>
   item && typeof item.text === 'string' && item.text.trim() &&
   (item.completed === undefined || typeof item.completed === 'boolean')));
-// Identify common Mongoose validation errors that should be reported as bad input.
 const validationError = (error) => error.name === 'ValidationError' || error.name === 'CastError';
-
-// Require a valid login token for every note endpoint declared below.
 router.use(protect);
-
-// Return the signed-in user's notes with optional search, tag, and pin filters.
 router.get('/', async (req, res) => {
   try {
     const { search, tag, pinned } = req.query;
@@ -39,8 +32,6 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: 'Could not retrieve notes', error: error.message });
   }
 });
-
-// Find one note only when it belongs to the signed-in user.
 router.get('/:id', async (req, res) => {
   try {
     if (!validId(req.params.id)) return res.status(400).json({ message: 'Invalid note ID' });
@@ -51,8 +42,6 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({ message: 'Could not retrieve note', error: error.message });
   }
 });
-
-// Validate and save a new note under the authenticated user's ID.
 router.post('/', async (req, res) => {
   try {
     const { title, content, tags, pinned, checklistEnabled, checklist } = req.body || {};
@@ -74,8 +63,6 @@ router.post('/', async (req, res) => {
     res.status(validationError(error) ? 400 : 500).json({ message: 'Could not create note', error: error.message });
   }
 });
-
-// Validate changes and update only a note owned by the signed-in user.
 router.put('/:id', async (req, res) => {
   try {
     if (!validId(req.params.id)) return res.status(400).json({ message: 'Invalid note ID' });
@@ -97,8 +84,6 @@ router.put('/:id', async (req, res) => {
     res.status(validationError(error) ? 400 : 500).json({ message: 'Could not update note', error: error.message });
   }
 });
-
-// Delete a note only when its owner matches the signed-in user.
 router.delete('/:id', async (req, res) => {
   try {
     if (!validId(req.params.id)) return res.status(400).json({ message: 'Invalid note ID' });
@@ -109,8 +94,6 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ message: 'Could not delete note', error: error.message });
   }
 });
-
-// Toggle a user's note pin and save the updated timestamp.
 router.patch('/:id/pin', async (req, res) => {
   try {
     if (!validId(req.params.id)) return res.status(400).json({ message: 'Invalid note ID' });

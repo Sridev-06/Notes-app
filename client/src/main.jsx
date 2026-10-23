@@ -1,22 +1,18 @@
-// Renders the MyNotes sign-in, account creation, note editing, and dashboard UI.
-import React, { useEffect, useMemo, useState } from 'react';
+// Frontend entry point for the MyNotes application.
+// Creates the shared Axios client used to communicate with the backend API.
+// Defines the sign-in, note form, note card, and dashboard React components.
+// Manages browser session state and coordinates note actions and API responses.import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import axios from 'axios';
 import './style.css';
-
 const api = axios.create({ baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api' });
-// Attach the saved JWT to each API request so protected note routes can identify the user.
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('mynotes-token');
   if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
-// Choose a readable error message from the API response or use a connection hint.
 const messageFrom = (error) => error.response?.data?.message || 'Something went wrong. Check that the API and MongoDB are running.';
-// Format a note's updated timestamp for display on its card.
 const dateLabel = (date) => new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(date));
-
-// Displays login and registration forms and sends credentials to the auth API.
 function AuthScreen({ onAuthenticated }) {
   const [mode, setMode] = useState('login');
   const [email, setEmail] = useState('');
@@ -25,8 +21,6 @@ function AuthScreen({ onAuthenticated }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const registering = mode === 'register';
-
-  // Validate the form, call the selected auth endpoint, and report success or failure.
   async function submit(event) {
     event.preventDefault();
     setError('');
@@ -60,8 +54,6 @@ function AuthScreen({ onAuthenticated }) {
     <p className="auth-switch">{registering ? 'Already have an account?' : 'New to MyNotes?'} <button type="button" onClick={() => { setMode(registering ? 'login' : 'register'); setError(''); }}>{registering ? 'Sign in' : 'Create an account'}</button></p>
   </section></main>;
 }
-
-// Displays the reusable create/edit form, including optional checklist controls.
 function NoteForm({ note, busy, onClose, onSave }) {
   const [title, setTitle] = useState(note?.title || '');
   const [content, setContent] = useState(note?.content || '');
@@ -69,8 +61,6 @@ function NoteForm({ note, busy, onClose, onSave }) {
   const [checklistEnabled, setChecklistEnabled] = useState(note?.checklistEnabled || false);
   const [checklist, setChecklist] = useState(note?.checklist || []);
   const [formError, setFormError] = useState('');
-
-  // Validate note text and convert comma-separated tags and checklist rows to API data.
   function submit(event) {
     event.preventDefault();
     if (!title.trim() || !content.trim()) {
@@ -109,8 +99,6 @@ function NoteForm({ note, busy, onClose, onSave }) {
     </section>
   </div>;
 }
-
-// Displays one note card with actions for editing, deleting, pinning, and checklist items.
 function NoteCard({ note, onEdit, onDelete, onPin, onToggleChecklist, busy }) {
   return <article className={`note-card${note.pinned ? ' is-pinned' : ''}`}>
     <div className="card-top"><span className="note-date">{dateLabel(note.updatedAt)}</span><button className={`pin-button${note.pinned ? ' active' : ''}`} type="button" onClick={() => onPin(note)} aria-label={note.pinned ? 'Unpin note' : 'Pin note'} title={note.pinned ? 'Unpin note' : 'Pin note'}>{note.pinned ? '◆' : '◇'} <span>{note.pinned ? 'Pinned' : 'Pin'}</span></button></div>
@@ -124,16 +112,11 @@ function NoteCard({ note, onEdit, onDelete, onPin, onToggleChecklist, busy }) {
     <div className="card-bottom"><div className="tag-list">{note.tags?.length ? note.tags.map((tag) => <span className="tag" key={tag}>{tag}</span>) : <span className="no-tags">No tags</span>}</div><div className="card-actions"><button type="button" onClick={() => onEdit(note)}>Edit</button><button type="button" className="delete-action" onClick={() => onDelete(note)}>Delete</button></div></div>
   </article>;
 }
-
-// Renders a collection of note cards or a helpful empty-state message.
 function NoteGrid({ notes, onEdit, onDelete, onPin, onToggleChecklist, busy, emptyText }) {
   if (!notes.length) return <div className="empty-state"><div className="empty-icon">✳</div><h3>{emptyText}</h3><p>Your notes will feel right at home here.</p></div>;
   return <div className="note-grid">{notes.map((note) => <NoteCard key={note._id} note={note} onEdit={onEdit} onDelete={onDelete} onPin={onPin} onToggleChecklist={onToggleChecklist} busy={busy} />)}</div>;
 }
-
-// Owns authentication state and coordinates the notes dashboard and API operations.
 function App() {
-  // Restore a saved browser session on page load when both values are present.
   const [auth, setAuth] = useState(() => {
     const token = localStorage.getItem('mynotes-token');
     const email = localStorage.getItem('mynotes-email');
@@ -148,8 +131,6 @@ function App() {
   const [notice, setNotice] = useState('');
   const [editor, setEditor] = useState(null);
   const [tagOptions, setTagOptions] = useState([]);
-
-  // Fetch notes using the current search and tag filters, and refresh available tags.
   async function loadNotes(searchText = query, selectedTag = tag) {
     if (!auth) return;
     setLoading(true);
@@ -171,15 +152,11 @@ function App() {
       setLoading(false);
     }
   }
-
-  // Reload notes after the search or selected tag changes, with a short debounce.
   useEffect(() => {
     if (!auth) return undefined;
     const timer = setTimeout(() => loadNotes(query, tag), 220);
     return () => clearTimeout(timer);
   }, [query, tag, auth?.token]);
-
-  // Clear transient success messages after a few seconds.
   useEffect(() => {
     if (!notice) return undefined;
     const timer = setTimeout(() => setNotice(''), 3000);
@@ -188,16 +165,12 @@ function App() {
 
   const pinnedNotes = useMemo(() => notes.filter((note) => note.pinned), [notes]);
   const otherNotes = useMemo(() => notes.filter((note) => !note.pinned), [notes]);
-
-  // Save the token and account email after successful registration or login.
   function acceptAuthentication(data) {
     localStorage.setItem('mynotes-token', data.token);
     localStorage.setItem('mynotes-email', data.user.email);
     setAuth(data);
     setLoading(true);
   }
-
-  // Remove saved session data and clear private notes from the current browser view.
   function signOut() {
     localStorage.removeItem('mynotes-token');
     localStorage.removeItem('mynotes-email');
@@ -208,8 +181,6 @@ function App() {
     setError('');
     setLoading(false);
   }
-
-  // Create a new note or update the currently edited note, then reload the list.
   async function saveNote(values) {
     setBusy(true);
     try {
@@ -225,8 +196,6 @@ function App() {
       setBusy(false);
     }
   }
-
-  // Ask for confirmation, delete the selected note, and refresh the dashboard.
   async function deleteNote(note) {
     if (!window.confirm(`Delete “${note.title}”? This cannot be undone.`)) return;
     setBusy(true);
@@ -241,8 +210,6 @@ function App() {
       setBusy(false);
     }
   }
-
-  // Toggle and persist the selected note's pinned state.
   async function togglePin(note) {
     setBusy(true);
     try {
@@ -256,8 +223,6 @@ function App() {
       setBusy(false);
     }
   }
-
-  // Toggle one checklist item's completion state and persist the updated note.
   async function toggleChecklistItem(note, itemIndex) {
     const checklist = note.checklist.map((item, index) => index === itemIndex
       ? { ...item, completed: !item.completed }
@@ -298,6 +263,5 @@ function App() {
     {editor && <NoteForm key={editor.note?._id || 'new'} note={editor.note} busy={busy} onClose={() => setEditor(null)} onSave={saveNote} />}
   </div>;
 }
-
 createRoot(document.getElementById('root')).render(<React.StrictMode><App /></React.StrictMode>);
 

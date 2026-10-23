@@ -1,7 +1,7 @@
-// Verifies a Bearer JWT and makes its trusted user ID available to protected routes.
-const jwt = require('jsonwebtoken');
-
-// Reject unauthenticated requests; continue only when the token is valid.
+// Authentication middleware used by protected API routes.
+// Reads the Bearer token sent in the HTTP Authorization header.
+// Verifies the token signature and expiration using the private JWT secret.
+// Adds the authenticated account ID to the request for later route handlers.const jwt = require('jsonwebtoken');
 function protect(req, res, next) {
   const authorization = req.headers.authorization || '';
   const [scheme, token] = authorization.split(' ');

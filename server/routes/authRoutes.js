@@ -1,15 +1,13 @@
-// Provides public registration and login endpoints that return a short-lived JWT.
-const express = require('express');
+// Defines the public account authentication endpoints for the API.
+// Validates registration details and creates new user accounts.
+// Checks credentials during login without returning password hashes.
+// Issues signed JWT tokens so the frontend can access protected note routes.const express = require('express');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const router = express.Router();
-
-// Sign a token containing the user's ID so protected APIs can identify the owner.
 function createToken(userId) {
   return jwt.sign({ id: userId }, process.env.JWT_SECRET, { expiresIn: '7d' });
 }
-
-// Return a consistent authentication response without exposing the password hash.
 function sendUser(res, status, message, user) {
   return res.status(status).json({
     message,
@@ -17,8 +15,6 @@ function sendUser(res, status, message, user) {
     user: { id: user._id, email: user.email },
   });
 }
-
-// Validate and create an account, then return its token and public profile.
 router.post('/register', async (req, res) => {
   try {
     const { email, password } = req.body || {};
@@ -42,8 +38,6 @@ router.post('/register', async (req, res) => {
     return res.status(500).json({ message: 'Could not create account', error: error.message });
   }
 });
-
-// Verify submitted credentials and issue a token for the matching account.
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body || {};

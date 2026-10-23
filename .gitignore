@@ -1,5 +1,7 @@
-# Keep dependencies, build output, local environment values, and logs out of version control.
-node_modules/
+# Lists generated and private files that Git should leave out of commits.
+# Dependencies and build output can be recreated from source and package files.
+# Local environment files may contain database credentials and JWT secrets.
+# Log files are runtime output rather than source files needed in the repository.node_modules/
 dist/
 .env
 *.log
