@@ -1,0 +1,5 @@
+# Keep dependencies, build output, local environment values, and logs out of version control.
+node_modules/
+dist/
+.env
+*.log

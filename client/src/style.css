@@ -1,0 +1,77 @@
+/* Defines layout, colors, typography, and responsive styles for the MyNotes React interface. */
+
+:root{font-family:'DM Sans',sans-serif;color:#292921;background:#ffffff;font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-optical-sizing:auto;font-weight:400;font-size:14px;font-feature-settings:'ss01' on;--ink:#292921;--muted:#85857a;--line:#e9e8e1;--green:#53664e;--green-dark:#40523c;--paper:#fff;--serif:'DM Sans',Arial,sans-serif}*{box-sizing:border-box}body{margin:0;min-width:320px;min-height:100vh}button,input,textarea,select{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.65}.app-shell{min-height:100vh}.topbar{height:76px;padding:0 max(5vw,24px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:rgba(255,255,255,.67)}.brand{display:flex;gap:10px;align-items:center;color:var(--ink);text-decoration:none;font-weight:600;letter-spacing:-.3px}.brand-mark{width:31px;height:31px;display:grid;place-items:center;background:#e8ece4;border-radius:10px;color:var(--green);font-family:var(--serif);font-size:13px}.topbar-right{display:flex;align-items:center;gap:25px}.private-label{font-size:14px;color:var(--muted);display:flex;gap:8px;align-items:center}.status-dot{width:7px;height:7px;border-radius:50%;background:#93aa85}.button{border:0;border-radius:7px;padding:11px 16px;font-size:14px;font-weight:600;transition:background .16s,transform .16s}.button:hover{transform:translateY(-1px)}.button-primary{background:var(--green);color:white}.button-primary:hover{background:var(--green-dark)}.top-add{display:flex;gap:6px;align-items:center}.plus{font-size:14px;line-height:12px}.main-content{max-width:1100px;padding:0 28px;margin:0 auto}.welcome{min-height:266px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);position:relative;overflow:hidden}.eyebrow{font-size:13px;letter-spacing:1.65px;font-weight:700;color:#818476}.welcome h1{font:600 42px/1.2 var(--serif);letter-spacing:-1.2px;margin:13px 0 10px}.welcome h1 em{color:var(--green);font-weight:500}.welcome p{color:var(--muted);font-size:14px}.welcome-art{position:relative;width:240px;height:190px;margin-right:54px}.art-paper{position:absolute;width:118px;height:145px;background:#e9ede4;left:74px;top:26px;transform:rotate(7deg);border-radius:5px;box-shadow:0 15px 28px #46544016;padding:37px 19px}.art-paper i{display:block;height:2px;width:72px;background:#bdc7b5;margin-bottom:11px;border-radius:2px}.art-paper i:nth-child(2){width:52px}.art-paper i:nth-child(3){width:64px}.art-paper b{position:absolute;bottom:14px;right:15px;color:#839379;font-size:14px}.sun{position:absolute;top:7px;right:23px;color:#c9a66e;font-size:14px}.art-dot{position:absolute;width:9px;height:9px;border-radius:50%;background:#d6b987}.dot-one{left:44px;bottom:29px}.dot-two{right:14px;bottom:48px;width:5px;height:5px;background:#a6b39d}.toolbar{display:flex;align-items:center;gap:10px;padding:23px 0 31px}.search-box{display:flex;align-items:center;gap:9px;width:min(370px,55%);height:39px;padding:0 12px;background:#fff;border:1px solid var(--line);border-radius:6px;color:#85857a}.search-box>span{font-size:14px;line-height:1;transform:rotate(-20deg)}.search-box input{min-width:0;flex:1;border:0;outline:0;background:none;color:var(--ink);font-size:13px}.search-box input::placeholder{color:#a2a196}.search-box button{border:0;background:none;font-size:14px;color:var(--muted)}.filter-select{height:39px;display:flex;align-items:center;gap:8px;padding:0 12px;border:1px solid var(--line);background:#fff;border-radius:6px;color:#88887e;font-size:13px;position:relative}.filter-select select{appearance:none;border:0;outline:0;background:transparent;color:var(--ink);font-size:13px;padding-right:16px;cursor:pointer}.select-chevron{position:absolute;right:10px;pointer-events:none}.note-count{margin-left:auto;font-size:14px;color:#929286}.alert{padding:10px 12px;margin:-15px 0 24px;border-radius:6px;display:flex;align-items:center;gap:8px;font-size:13px}.alert button{margin-left:auto;background:none;border:0;color:inherit;font-size:13px}.error-alert{background:#fff0ec;color:#a44f3d}.success-alert{background:#eef3e9;color:#53664e}.notes-section{margin:0 0 34px}.section-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.section-heading>div{display:flex;align-items:center;gap:9px}.section-symbol{font-size:13px;color:#a1a091}.pinned-symbol{color:#9a8054;font-size:14px}.section-heading h2{font:600 18px var(--serif);margin:0;letter-spacing:-.2px}.section-count{border-radius:20px;padding:3px 7px;background:#eeeee8;color:#848477;font-size:13px}.section-caption{font-size:14px;color:#a1a095}.note-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.note-card{min-height:184px;padding:16px 16px 13px;background:var(--paper);border:1px solid #eeede8;border-radius:8px;display:flex;flex-direction:column;transition:box-shadow .18s,border-color .18s}.note-card:hover{border-color:#dcded4;box-shadow:0 8px 22px #3133240a}.note-card.is-pinned{background:#fffefa}.card-top{display:flex;justify-content:space-between;align-items:center}.note-date{font-size:13px;color:#a1a095}.pin-button{background:none;border:0;color:#9a9a8d;font-size:14px;padding:2px 0}.pin-button.active{color:#9b8052}.pin-button span{margin-left:3px}.note-body{padding:13px 0 8px;border:0;background:none;text-align:left;flex:1;color:var(--ink)}.note-body h3{font:600 15px/1.4 var(--serif);margin:0 0 7px}.note-body p{margin:0;color:#828277;font-size:14px;line-height:1.65;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;white-space:pre-wrap}.card-bottom{display:flex;justify-content:space-between;align-items:end;gap:8px;margin-top:12px}.tag-list{display:flex;flex-wrap:wrap;gap:5px}.tag{padding:4px 7px;border-radius:4px;background:#f1f2ed;color:#77816f;font-size:13px}.no-tags{font-size:13px;color:#c0bfb6}.card-actions{display:flex;gap:11px}.card-actions button{padding:2px 0;border:0;background:none;color:#77776d;font-size:13px}.card-actions button:hover{color:var(--green)}.card-actions .delete-action:hover{color:#ad5947}.empty-state{min-height:173px;border:1px dashed #deded5;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:#ffffff}.empty-icon{color:#a7b09e;font-size:14px}.empty-state h3{font:600 14px var(--serif);margin:7px 0 4px}.empty-state p{margin:0;color:#99998e;font-size:14px}.loading-state{height:220px;display:flex;align-items:center;justify-content:center;gap:10px;color:var(--muted);font-size:14px}.loader{width:15px;height:15px;border:2px solid #dfe3da;border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.footer{margin-top:55px;padding:19px 0 26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:#a4a398;font-size:13px}.footer span:last-child{color:#a8b19f;font-size:13px}.modal-backdrop{position:fixed;inset:0;z-index:5;background:#27291f70;display:grid;place-items:center;padding:20px}.editor{width:min(510px,100%);background:#fbfbf8;border-radius:10px;padding:25px 27px;box-shadow:0 20px 70px #16180f30}.editor-heading{display:flex;justify-content:space-between;align-items:start;margin-bottom:20px}.editor-heading h2{font:600 23px var(--serif);margin:7px 0 0}.icon-button{background:none;border:0;font-size:14px;color:#88887e;line-height:1}.editor form{display:flex;flex-direction:column}.editor label{font-size:14px;font-weight:600;margin:13px 0 7px}.editor input,.editor textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:5px;outline:0;background:#fff;color:var(--ink);font-size:13px;resize:vertical}.editor input:focus,.editor textarea:focus,.search-box:focus-within{border-color:#a8b49e;box-shadow:0 0 0 3px #e8ece4}.label-hint{font-weight:400;color:#a2a196;margin-left:5px}.form-error{color:#a44f3d;font-size:14px}.editor-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:21px}.button-quiet{background:#efefe9;color:#66665b}
+@media(max-width:760px){.topbar{height:66px;padding:0 18px}.private-label{display:none}.main-content{padding:0 19px}.welcome{min-height:234px}.welcome h1{font-size:44px}.welcome-art{margin-right:4px;transform:scale(.8);transform-origin:right center;width:185px}.note-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.section-caption{display:none}.toolbar{padding:18px 0 25px}.search-box{width:auto;flex:1}}
+@media(max-width:520px){.brand{font-size:14px}.top-add{padding:10px 11px}.main-content{padding:0 16px}.welcome{min-height:220px}.welcome h1{font-size:14px}.welcome p{max-width:180px;line-height:1.5}.welcome-art{position:absolute;right:-31px;bottom:-7px;opacity:.62;transform:scale(.66);transform-origin:bottom right}.toolbar{gap:7px}.search-box{height:37px;padding:0 8px;gap:5px}.search-box input{font-size:14px}.filter-select{height:37px;padding:0 8px;gap:5px}.filter-select select{max-width:72px}.note-count{display:none}.note-grid{grid-template-columns:1fr}.note-card{min-height:166px}.section-heading h2{font-size:14px}.editor{padding:21px 19px}.footer{margin-top:38px}}
+
+
+
+
+/* Applies the dark GitHub-inspired palette and Times New Roman typography. */
+:root{font-family:'Times New Roman',Times,serif;color:#e6edf3;background:#0d1117;--ink:#e6edf3;--muted:#9da7b3;--line:#30363d;--green:#238636;--green-dark:#2ea043;--paper:#161b22;--serif:'Times New Roman',Times,serif;color-scheme:dark}
+body,.app-shell{background:#0d1117;color:#e6edf3}
+.topbar{background:#010409;border-bottom-color:#30363d}
+.brand,.brand-mark{color:#e6edf3}
+.brand-mark{background:#21262d;border:1px solid #30363d;font-family:'Times New Roman',Times,serif;font-weight:700}
+.private-label,.welcome p,.note-date,.section-caption,.note-count,.footer,.no-tags{color:#9da7b3}
+.eyebrow{color:#8b949e}
+.welcome h1,.section-heading h2,.note-body h3,.editor-heading h2,.empty-state h3{color:#e6edf3}
+.welcome h1 em{color:#7ee787;font-style:normal}
+.welcome{border-bottom-color:#30363d}
+.art-paper{background:#21262d;box-shadow:0 15px 28px #0005}
+.art-paper i{background:#484f58}
+.art-paper b,.sun,.footer span:last-child{color:#7ee787}
+.search-box,.filter-select,.note-card,.editor input,.editor textarea{background:#161b22;border-color:#30363d;color:#e6edf3}
+.search-box input,.filter-select select{color:#e6edf3}
+.search-box input::placeholder,.editor input::placeholder,.editor textarea::placeholder{color:#8b949e}
+.filter-select select option{background:#161b22;color:#e6edf3}
+.section-count,.tag{background:#21262d;color:#c9d1d9}
+.note-card.is-pinned{background:#1b211c;border-color:#3a4b3c}
+.note-body p{color:#c9d1d9}
+.pin-button{color:#8b949e}
+.pin-button.active{color:#d29922}
+.card-actions button{color:#c9d1d9}
+.card-actions .delete-action:hover{color:#ff7b72}
+.empty-state{background:#0d1117;border-color:#30363d}
+.loader{border-color:#30363d;border-top-color:#3fb950}
+.footer{border-top-color:#30363d}
+.editor{background:#0d1117;color:#e6edf3;border:1px solid #30363d}
+.editor input:focus,.editor textarea:focus,.search-box:focus-within{border-color:#3fb950;box-shadow:0 0 0 3px #23863633}
+.button-quiet{background:#21262d;color:#e6edf3;border:1px solid #30363d}
+.button-quiet:hover{background:#30363d}
+.icon-button{color:#9da7b3}
+.tag{color:#a5d6ff}
+.alert.error-alert{background:#3d1f23;color:#ffb4ab}
+.alert.success-alert{background:#132a1b;color:#7ee787}
+/* Styles the sign-in and account creation screens. */
+.auth-page{min-height:100vh;display:grid;place-items:center;padding:28px;background:#0d1117}
+.auth-card{width:min(420px,100%);padding:34px;background:#161b22;border:1px solid #30363d;border-radius:10px;box-shadow:0 18px 50px #0004}
+.auth-brand{display:flex;align-items:center;gap:10px;margin-bottom:30px;font-size:21px;font-weight:700}
+.auth-card>.eyebrow{margin:0 0 8px}
+.auth-card h1{font:600 28px 'Times New Roman',Times,serif;margin:0 0 8px;color:#e6edf3}
+.auth-description{margin:0 0 22px;color:#9da7b3;font-size:15px}
+.auth-card form{display:flex;flex-direction:column}
+.auth-card label{font-size:15px;margin:12px 0 7px;color:#e6edf3}
+.auth-card input{width:100%;height:42px;padding:0 12px;border:1px solid #30363d;border-radius:6px;background:#0d1117;color:#e6edf3;font:16px 'Times New Roman',Times,serif;outline:0}
+.auth-card input:focus{border-color:#3fb950;box-shadow:0 0 0 3px #23863633}
+.auth-card input::placeholder{color:#8b949e}
+.auth-submit{width:100%;margin-top:22px;font:600 16px 'Times New Roman',Times,serif}
+.auth-switch{margin:22px 0 0;text-align:center;color:#9da7b3;font-size:14px}
+.auth-switch button{padding:0;border:0;background:none;color:#58a6ff;text-decoration:underline;font:inherit}
+.auth-error{padding:10px 12px;border:1px solid #6e3639;border-radius:6px;background:#3d1f23;color:#ffb4ab;font-size:14px}
+.signed-in-email{max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#c9d1d9;font-size:14px}
+.signout-button{padding:8px 12px;font-size:14px}
+@media(max-width:760px){.signed-in-email{display:none}.auth-card{padding:28px 23px}}
+/* Styles optional checklist controls in the editor and clickable items on note cards. */
+.checklist-toggle{display:flex;align-items:center;gap:9px;margin-top:18px!important;color:#e6edf3}
+.checklist-toggle input[type=checkbox],.checklist-edit-row input[type=checkbox],.checklist-item input[type=checkbox]{width:16px;height:16px;margin:0;accent-color:#238636;flex:0 0 auto}
+.checklist-editor{display:grid;gap:8px;margin-top:9px}
+.checklist-edit-row{display:flex;align-items:center;gap:9px}
+.checklist-edit-row input[type=text]{flex:1;min-width:0}
+.checklist-edit-row .remove-checklist-item{border:0;background:none;color:#ff7b72;font:22px 'Times New Roman',Times,serif;cursor:pointer}
+.add-checklist-item{justify-self:start;padding:5px 0;border:0;background:none;color:#58a6ff;font:14px 'Times New Roman',Times,serif;cursor:pointer}
+.card-checklist{display:grid;gap:7px;margin:4px 0 10px;padding:10px 0;border-top:1px solid #30363d}
+.checklist-item{display:flex;align-items:flex-start;gap:8px;color:#c9d1d9;font-size:13px;line-height:1.35}
+.checklist-item input[type=checkbox]{margin-top:1px}
+.checklist-item.completed span{text-decoration:line-through;color:#8b949e}
+
